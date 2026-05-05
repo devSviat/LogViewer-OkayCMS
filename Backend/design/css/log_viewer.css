@@ -1,0 +1,126 @@
+.sviat_log_viewer_tabs {
+    margin-bottom: 12px;
+}
+
+.sviat_log_viewer_search {
+    margin: 0;
+}
+
+.sviat_log_viewer_search--has-reset .form-control {
+    padding-right: 70px;
+}
+
+.sviat_log_viewer_search--has-reset .sviat_log_viewer_reset_btn {
+    right: 35px;
+    color: #c0392b;
+}
+
+.sviat_log_viewer_search--has-reset .sviat_log_viewer_reset_btn:hover {
+    color: #962f23;
+}
+
+.sviat_log_viewer_col_time {
+    width: 180px;
+}
+
+.sviat_log_viewer_col_level {
+    width: 130px;
+    text-align: center;
+}
+
+.sviat_log_viewer_col_message {
+    flex: 1;
+    min-width: 320px;
+    text-align: left;
+}
+
+.sviat_log_viewer_msg_text {
+    text-align: left;
+    word-break: break-word;
+}
+
+.sviat_log_viewer_more {
+    margin-top: 6px;
+}
+
+.okay_list .okay_list_boding a.sviat_log_viewer_toggle_link,
+a.sviat_log_viewer_toggle_link,
+a.sviat_log_viewer_toggle_link:hover,
+a.sviat_log_viewer_toggle_link:focus {
+    display: inline-flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    align-items: center;
+    gap: 6px;
+    font-size: 12px;
+    line-height: 1;
+    cursor: pointer;
+    user-select: none;
+    color: #6c757d;
+    text-decoration: none;
+    word-wrap: normal;
+}
+
+a.sviat_log_viewer_toggle_link:hover {
+    color: #495057;
+}
+
+a.sviat_log_viewer_toggle_link > svg {
+    width: 14px;
+    height: 14px;
+    flex: 0 0 14px;
+    display: inline-block;
+}
+
+a.sviat_log_viewer_toggle_link .fn_sviat_log_viewer_toggle_label {
+    display: inline-block;
+    line-height: 1;
+}
+
+.sviat_log_viewer_panel {
+    position: relative;
+    display: none;
+    margin-top: 8px;
+    background: #f5f7fa;
+    border: 1px solid #e1e6ec;
+    border-radius: 6px;
+    padding: 12px 12px 12px 14px;
+}
+
+.sviat_log_viewer_more.is-open .sviat_log_viewer_panel {
+    display: block;
+}
+
+.sviat_log_viewer_panel .fn_sviat_log_viewer_copy {
+    position: absolute;
+    top: 6px;
+    right: 6px;
+    z-index: 2;
+}
+
+.sviat_log_viewer_panel_content {
+    text-align: left;
+    white-space: pre-wrap;
+    word-wrap: break-word;
+    margin: 0;
+    padding-right: 90px;
+    font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
+    font-size: 12px;
+    line-height: 1.5;
+    color: #2d3748;
+}
+
+.sviat_log_viewer_list .upper {
+    text-transform: uppercase !important;
+    /* font-weight: 700; */
+}
+
+.sviat_log_viewer_list .blink {
+    animation: sviat_log_viewer_blink 2s linear infinite;
+}
+
+@keyframes sviat_log_viewer_blink {
+    0%   { opacity: 0; }
+    50%  { opacity: .5; }
+    100% { opacity: 1; }
+}
