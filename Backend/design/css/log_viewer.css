@@ -39,6 +39,10 @@
     word-break: break-word;
 }
 
+.sviat_log_viewer_msg_text--mobile {
+    display: none;
+}
+
 .sviat_log_viewer_more {
     margin-top: 6px;
 }
@@ -75,20 +79,41 @@ a.sviat_log_viewer_toggle_link > svg {
 a.sviat_log_viewer_toggle_link .fn_sviat_log_viewer_toggle_label {
     display: inline-block;
     line-height: 1;
+    transition: opacity 0.1s ease, transform 0.1s ease;
+}
+
+a.sviat_log_viewer_toggle_link .fn_sviat_log_viewer_toggle_label.is-switching {
+    opacity: 0;
+    transform: translateY(-2px);
 }
 
 .sviat_log_viewer_panel {
     position: relative;
-    display: none;
-    margin-top: 8px;
+    display: block;
+    margin-top: 0;
     background: #f5f7fa;
-    border: 1px solid #e1e6ec;
+    border: 0 solid #e1e6ec;
     border-radius: 6px;
-    padding: 12px 12px 12px 14px;
+    padding: 0;
+    max-height: 0;
+    opacity: 0;
+    transform: translateY(-6px);
+    overflow: hidden;
+    visibility: hidden;
+    pointer-events: none;
+    transition: max-height 0.18s ease, opacity 0.14s ease, transform 0.14s ease, visibility 0s linear 0.18s;
 }
 
 .sviat_log_viewer_more.is-open .sviat_log_viewer_panel {
-    display: block;
+    margin-top: 8px;
+    border-width: 1px;
+    padding: 12px 12px 12px 14px;
+    max-height: 600px;
+    opacity: 1;
+    transform: translateY(0);
+    visibility: visible;
+    pointer-events: auto;
+    transition: max-height 0.18s ease, opacity 0.14s ease, transform 0.14s ease, visibility 0s;
 }
 
 .sviat_log_viewer_panel .fn_sviat_log_viewer_copy {
@@ -123,4 +148,102 @@ a.sviat_log_viewer_toggle_link .fn_sviat_log_viewer_toggle_label {
     0%   { opacity: 0; }
     50%  { opacity: .5; }
     100% { opacity: 1; }
+}
+
+/* Tablet: compact columns + horizontal scroll (like orders/products) */
+@media only screen and (max-width: 991px) {
+    .sviat_log_viewer_list.okay_list {
+        overflow-x: auto;
+        overflow-y: visible;
+        -webkit-overflow-scrolling: touch;
+        width: 100%;
+    }
+
+    .sviat_log_viewer_list .okay_list_head,
+    .sviat_log_viewer_list .okay_list_row {
+        min-width: 720px;
+    }
+}
+
+/* Mobile (portrait): card layout */
+@media only screen and (max-width: 767px) and (orientation: portrait) {
+    .sviat_log_viewer_list.okay_list,
+    .sviat_log_viewer_list .okay_list_body {
+        overflow: visible;
+        max-width: 100%;
+    }
+
+    .sviat_log_viewer_list .okay_list_body_item {
+        border: 1px solid rgba(0, 0, 0, 0.08);
+        border-radius: 6px;
+        margin-bottom: 6px;
+        overflow: visible;
+        background: #fff;
+        width: 100%;
+        max-width: 100%;
+    }
+
+    .sviat_log_viewer_list .okay_list_row {
+        display: grid;
+        grid-template-columns: 1fr auto;
+        grid-template-rows: auto auto;
+        grid-template-areas:
+            "time level"
+            "message message";
+        gap: 6px 10px;
+        padding: 10px;
+        min-width: 0;
+        width: 100%;
+        max-width: 100%;
+        box-sizing: border-box;
+    }
+
+    .sviat_log_viewer_list .okay_list_boding {
+        padding: 0;
+        overflow: visible;
+        min-width: 0;
+    }
+
+    /* Hide "mobile labels" (we use visual layout instead) */
+    .sviat_log_viewer_list .okay_list_boding[data-mobile-label]::before {
+        display: none;
+    }
+
+    .sviat_log_viewer_list .sviat_log_viewer_col_time {
+        grid-area: time;
+        width: auto;
+        text-align: left;
+        align-self: start;
+    }
+
+    .sviat_log_viewer_list .sviat_log_viewer_col_level {
+        grid-area: level;
+        width: auto;
+        text-align: right;
+        align-self: start;
+        justify-self: end;
+    }
+
+    .sviat_log_viewer_list .sviat_log_viewer_col_message {
+        grid-area: message;
+        min-width: 0;
+        text-align: left;
+    }
+
+    .sviat_log_viewer_list .sviat_log_viewer_msg_text--full {
+        display: none;
+    }
+
+    .sviat_log_viewer_list .sviat_log_viewer_msg_text--mobile {
+        display: block;
+    }
+
+    .sviat_log_viewer_list .sviat_log_viewer_panel_content {
+        padding-right: 0;
+    }
+
+    .sviat_log_viewer_list .sviat_log_viewer_panel .fn_sviat_log_viewer_copy {
+        position: static;
+        margin-bottom: 8px;
+    }
 }

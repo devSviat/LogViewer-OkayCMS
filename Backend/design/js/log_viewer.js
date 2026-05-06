@@ -15,7 +15,14 @@ $(function () {
         var $wrap = $($link.data("target"));
         var $label = $link.find(".fn_sviat_log_viewer_toggle_label");
         var opened = $wrap.toggleClass("is-open").hasClass("is-open");
-        $label.text(opened ? $link.data("text-hide") : $link.data("text-show"));
+        $label.addClass("is-switching");
+
+        setTimeout(function () {
+            $label.text(opened ? $link.data("text-hide") : $link.data("text-show"));
+            requestAnimationFrame(function () {
+                $label.removeClass("is-switching");
+            });
+        }, 90);
     });
 
     $(document).on("click", ".fn_sviat_log_viewer_copy", function () {

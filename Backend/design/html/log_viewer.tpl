@@ -181,7 +181,7 @@
         <div class="row">
             <div class="col-lg-12 col-md-12 col-sm-12">
                 <div class="okay_list products_list sviat_log_viewer_list">
-                    <div class="okay_list_head">
+                    <div class="okay_list_head hidden-sm-down">
                         <div class="okay_list_heading sviat_log_viewer_col_time">
                             {$btr->sviat_log_viewer__col_time|escape}
                         </div>
@@ -196,10 +196,12 @@
                         {foreach $log_entries as $entry}
                             <div class="okay_list_body_item">
                                 <div class="okay_list_row">
-                                    <div class="okay_list_boding sviat_log_viewer_col_time">
+                                    <div class="okay_list_boding sviat_log_viewer_col_time"
+                                         data-mobile-label="{$btr->sviat_log_viewer__col_time|escape}:">
                                         <div class="text_grey font_13">{$entry.timestamp|escape}</div>
                                     </div>
-                                    <div class="okay_list_boding sviat_log_viewer_col_level">
+                                    <div class="okay_list_boding sviat_log_viewer_col_level"
+                                         data-mobile-label="{$btr->sviat_log_viewer__col_level|escape}:">
                                         <div class="wrap_tags">
                                             {if $entry.level == 'CRITICAL'}
                                                 <span class="tag tag-danger upper blink">{$entry.level|escape}</span>
@@ -216,9 +218,13 @@
                                             {/if}
                                         </div>
                                     </div>
-                                    <div class="okay_list_boding sviat_log_viewer_col_message">
-                                        <div class="text_dark sviat_log_viewer_msg_text">
-                                            {$entry.message|escape}
+                                    <div class="okay_list_boding sviat_log_viewer_col_message"
+                                         data-mobile-label="{$btr->sviat_log_viewer__col_message|escape}:">
+                                        <div class="text_dark sviat_log_viewer_msg_text sviat_log_viewer_msg_text--full">
+                                            {$entry.message|truncate:140:"..."|escape}
+                                        </div>
+                                        <div class="text_dark sviat_log_viewer_msg_text sviat_log_viewer_msg_text--mobile">
+                                            {$entry.message|truncate:60:"..."|escape}
                                         </div>
                                         {if $entry.is_long_message || $entry.has_trace}
                                             <div class="sviat_log_viewer_more"
