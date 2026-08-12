@@ -4,7 +4,17 @@ namespace Okay\Modules\Sviat\LogViewer\Services;
 
 class LogParser
 {
-    private const ENTRY_REGEX = '/^\[(\d{4}-\d{2}-\d{2}\s+\d{2}:\d{2}:\d{2})\]\s+([^\s]+)\.([^:]+):\s+(.+)$/';
+    /**
+     * Приймає обидва формати часу, бо в логах лежать обидва:
+     *   Monolog 2 - [2026-08-05 00:23:20]
+     *   Monolog 3 - [2026-08-05T22:56:42.815678+03:00]
+     * Monolog 3 приїхав із переносом двигуна з форку; до цього регекс знав лише
+     * перший варіант, тож усе, записане після переїзду, у переглядач не
+     * потрапляло взагалі - рядок не впізнавався як початок запису й мовчки
+     * прилипав трейсом до попереднього.
+     */
+    private const ENTRY_REGEX = '/^\[(\d{4}-\d{2}-\d{2}[\sT]\d{2}:\d{2}:\d{2}(?:\.\d+)?(?:Z|[+-]\d{2}:?\d{2})?)\]\s+([^\s]+)\.([^:]+):\s+(.+)$/';
+    private const TIMESTAMP_REGEX = '/^(\d{4}-\d{2}-\d{2})[\sT](\d{2}:\d{2}:\d{2})/';
     private const TRACE_REGEX = '/#\d+\s+/';
     private const PREVIEW_LIMIT = 200;
 
@@ -33,7 +43,7 @@ class LogParser
                 }
 
                 $current = [
-                    'timestamp'   => $m[1],
+                    'timestamp'   => $this->normalizeTimestamp($m[1]),
                     'channel'     => $m[2],
                     'level'       => strtoupper(trim($m[3])),
                     'full_message' => trim($m[4]),
@@ -82,6 +92,25 @@ class LogParser
         return array_values(array_filter($entries, static function ($e) use ($needle) {
             return mb_stripos($e['full_message'], $needle) !== false;
         }));
+    }
+
+    /**
+     * Зводить час до "Y-m-d H:i:s" незалежно від формату в файлі.
+     *
+     * Потрібно двічі: колонка часу не має стрибати між двома виглядами всередині
+     * одного дня деплою, і LogService::readAllEntries сортує записи через strcmp
+     * по цьому ж полю - при змішаних роздільниках ("T" > пробіл) порядок за
+     * однакову дату виходив би неправильним.
+     *
+     * Зона не переводиться: логи вже пишуться в Europe/Kyiv (php.ini date.timezone).
+     */
+    private function normalizeTimestamp(string $raw): string
+    {
+        if (preg_match(self::TIMESTAMP_REGEX, $raw, $m)) {
+            return $m[1] . ' ' . $m[2];
+        }
+
+        return $raw;
     }
 
     private function finalize(array $current, array $traceLines, string $fileDate): array
