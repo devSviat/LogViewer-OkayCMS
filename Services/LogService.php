@@ -129,9 +129,7 @@ class LogService
             }
         }
 
-        usort($merged, static function ($a, $b) {
-            return strcmp($b['timestamp'], $a['timestamp']);
-        });
+        usort($merged, static fn($a, $b) => strcmp($b['timestamp'], $a['timestamp']));
 
         return $merged;
     }

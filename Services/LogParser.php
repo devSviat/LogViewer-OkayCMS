@@ -13,10 +13,10 @@ class LogParser
      * потрапляло взагалі - рядок не впізнавався як початок запису й мовчки
      * прилипав трейсом до попереднього.
      */
-    private const ENTRY_REGEX = '/^\[(\d{4}-\d{2}-\d{2}[\sT]\d{2}:\d{2}:\d{2}(?:\.\d+)?(?:Z|[+-]\d{2}:?\d{2})?)\]\s+([^\s]+)\.([^:]+):\s+(.+)$/';
-    private const TIMESTAMP_REGEX = '/^(\d{4}-\d{2}-\d{2})[\sT](\d{2}:\d{2}:\d{2})/';
-    private const TRACE_REGEX = '/#\d+\s+/';
-    private const PREVIEW_LIMIT = 200;
+    private const string ENTRY_REGEX = '/^\[(\d{4}-\d{2}-\d{2}[\sT]\d{2}:\d{2}:\d{2}(?:\.\d+)?(?:Z|[+-]\d{2}:?\d{2})?)\]\s+([^\s]+)\.([^:]+):\s+(.+)$/';
+    private const string TIMESTAMP_REGEX = '/^(\d{4}-\d{2}-\d{2})[\sT](\d{2}:\d{2}:\d{2})/';
+    private const string TRACE_REGEX = '/#\d+\s+/';
+    private const int PREVIEW_LIMIT = 200;
 
     /**
      * Parses raw log content into structured entries.
@@ -74,9 +74,7 @@ class LogParser
         }
 
         $level = strtoupper($level);
-        return array_values(array_filter($entries, static function ($e) use ($level) {
-            return $e['level'] === $level;
-        }));
+        return array_values(array_filter($entries, static fn($e) => $e['level'] === $level));
     }
 
     /**
@@ -89,9 +87,7 @@ class LogParser
             return $entries;
         }
 
-        return array_values(array_filter($entries, static function ($e) use ($needle) {
-            return mb_stripos($e['full_message'], $needle) !== false;
-        }));
+        return array_values(array_filter($entries, static fn($e) => mb_stripos($e['full_message'], $needle) !== false));
     }
 
     /**
