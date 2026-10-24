@@ -12,17 +12,17 @@ use Okay\Modules\Sviat\LogViewer\Services\LogSource;
 
 class LogViewerAdmin extends IndexAdmin
 {
-    private const TEMPLATE = 'log_viewer.tpl';
+    private const string TEMPLATE = 'log_viewer.tpl';
 
-    private const ALLOWED_LIMITS = [10, 25, 50, 100];
-    private const DEFAULT_LIMIT = 25;
-    private const MAX_QUERY_LENGTH = 200;
+    private const array ALLOWED_LIMITS = [10, 25, 50, 100];
+    private const int DEFAULT_LIMIT = 25;
+    private const int MAX_QUERY_LENGTH = 200;
 
-    private const ALLOWED_LEVELS = [
+    private const array ALLOWED_LEVELS = [
         'CRITICAL', 'ERROR', 'WARNING', 'NOTICE', 'INFO', 'DEBUG',
     ];
 
-    private const LEVEL_LABELS = [
+    private const array LEVEL_LABELS = [
         'CRITICAL' => 'sviat_log_viewer__level_critical',
         'ERROR'    => 'sviat_log_viewer__level_error',
         'WARNING'  => 'sviat_log_viewer__level_warning',
