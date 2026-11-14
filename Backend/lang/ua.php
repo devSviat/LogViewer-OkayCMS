@@ -8,7 +8,7 @@ $lang['sviat_log_viewer__menu_title'] = 'Логи';
 
 // Page title
 $lang['sviat_log_viewer__title'] = 'Логи';
-$lang['sviat_log_viewer__source_app'] = 'Журнал додатку';
+$lang['sviat_log_viewer__source_app'] = 'Журнал застосунку';
 $lang['sviat_log_viewer__source_scheduler'] = 'Планувальник';
 
 // Filters
@@ -32,7 +32,7 @@ $lang['sviat_log_viewer__col_message'] = 'Повідомлення';
 // Empty / oversized states
 $lang['sviat_log_viewer__no_files'] = 'Файлів логу немає';
 $lang['sviat_log_viewer__no_entries'] = 'Записів не знайдено за вашими фільтрами';
-$lang['sviat_log_viewer__too_large'] = 'Файл занадто великий, щоб переглянути в адмінці. Скачайте його, щоб переглянути локально.';
+$lang['sviat_log_viewer__too_large'] = 'Файл завеликий для перегляду в адмінці. Завантажте його, щоб переглянути локально.';
 $lang['sviat_log_viewer__limit_is'] = 'ліміт';
 
 // Alert titles
@@ -55,8 +55,8 @@ $lang['sviat_log_viewer__confirm_delete_warn'] = 'Дію не можна ска�
 // Flash messages
 $lang['sviat_log_viewer__flash_deleted'] = 'Файл видалено:';
 $lang['sviat_log_viewer__flash_today_protected'] = 'Не можна видалити файл за сьогодні.';
-$lang['sviat_log_viewer__flash_invalid_date'] = 'Невалідна дата.';
-$lang['sviat_log_viewer__flash_invalid_source'] = 'Невалідне джерело.';
+$lang['sviat_log_viewer__flash_invalid_date'] = 'Некоректна дата.';
+$lang['sviat_log_viewer__flash_invalid_source'] = 'Некоректне джерело.';
 $lang['sviat_log_viewer__flash_not_found'] = 'Файл не знайдено за дату:';
 $lang['sviat_log_viewer__flash_delete_failed'] = 'Не вдалося видалити файл.';
 $lang['sviat_log_viewer__flash_csrf'] = 'Сесія недійсна. Спробуйте ще раз.';
